@@ -1,4 +1,5 @@
 import random
+import itertools
 
 
 def generate_grid(rows, columns):
@@ -22,16 +23,10 @@ def get_random_char(grid_char):
     return random_char
 
 
-def create_bomb_coordinates(grid_rows, grid_columns):
-    """
-    :param grid_rows:
-    :param grid_columns:
-    :return:
-    """
-    x_position = random.randrange(0, grid_columns)
-    y_position = random.randrange(0, grid_rows)
-    bomb_x_y = [x_position, y_position]
-    return bomb_x_y
+def create_bomb_coordinates(grid_rows, grid_columns, bombs_nb):
+    all_positions = list(itertools.product(range(grid_columns), range(grid_rows)))
+    array_of_bombs = random.sample(all_positions, bombs_nb)
+    return array_of_bombs
 
 
 def grid_generator(rows, columns, bombs):
@@ -67,15 +62,15 @@ def grid_generator(rows, columns, bombs):
     return grid
 
 
-def game_play(nb_of_rows, nb_of_columns, nb_of_bombs):
+def game_play(nb_of_rows, nb_of_columns, bomb_quantity):
     # setting the board game
     generate_grid(nb_of_rows, nb_of_columns)
     # generate the bombs, tik...tak...
-    for b in range(nb_of_bombs):
-        print(create_bomb_coordinates(nb_of_rows, nb_of_columns))
+    print(create_bomb_coordinates(nb_of_rows, nb_of_columns, bomb_quantity))
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     game_play(5, 5, 3)
     # grid_generator(3,5,3)
+
