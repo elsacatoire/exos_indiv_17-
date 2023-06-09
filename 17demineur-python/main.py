@@ -3,13 +3,7 @@ import itertools
 
 
 def generate_grid(rows, columns):
-    grid = []
-    for c in range(columns):
-        line = []
-        for r in range(rows):
-            line.append("#")
-        print(line)
-        grid.append(line)
+    grid = [['#' for _ in range(columns)] for _ in range(rows)]
     return grid
 
 
@@ -72,5 +66,6 @@ def game_play(nb_of_rows, nb_of_columns, bomb_quantity):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     game_play(5, 5, 3)
+    print(generate_grid(3, 3))
     # grid_generator(3,5,3)
 
