@@ -1,10 +1,17 @@
 import random
-#function for python bomb squad
-
 
 # il faut créer une grille neutre de A et quand on entre une coordonnée ça révèle la case
 
-#
+
+def generate_grid(rows, columns):
+    grid = []
+    for c in range(columns):
+        line = []
+        for r in range(rows):
+            line.append("#")
+        grid.append(line)
+    return grid
+
 
 def get_random_char(grid_char):
     """
@@ -24,9 +31,7 @@ def create_bomb_cordonates(grid_rows, grid_columns):
     """
     x_position = random.randrange(0,grid_columns)
     y_position = random.randrange(0, grid_rows)
-    bomb_x_y = []
-    bomb_x_y.append(x_position)
-    bomb_x_y.append(y_position)
+    bomb_x_y = [x_position, y_position]
     return bomb_x_y
 
 
@@ -40,11 +45,11 @@ def grid_generator(R, C, K):
     :return: a grid
     """
     grid = []
-    bombs_coordonates = []
+    bombs_coordinates = []
     # manufacturing some bombs...
     for b in range(K):
-        bombs_coordonates.append(create_bomb_cordonates(R, C))
-    print(f"bombs coordonate : {bombs_coordonates}")
+        bombs_coordinates.append(create_bomb_cordonates(R, C))
+    print(f"bombs coordinate : {bombs_coordinates}")
 
     # creating the grid
     for c in range(C):
@@ -53,8 +58,8 @@ def grid_generator(R, C, K):
         bomb_box = "X"
         # line by line
         for r in range(R):
-            intstant_coordonate = [r, c]
-            if(not intstant_coordonate in bombs_coordonates):
+            instant_coordinate = [r, c]
+            if not instant_coordinate in bombs_coordinates:
                 line.append(safe_box)
             else:
                 line.append(bomb_box)
@@ -63,7 +68,12 @@ def grid_generator(R, C, K):
     return grid
 
 
+def game_play(nb_of_rows, nb_of_columns, nb_of_bombs):
+
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    grid_generator(5,5,5)
+    grid_generator(5, 5, 5)
+    print(generate_grid(4, 7))
 
