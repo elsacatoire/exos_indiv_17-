@@ -1,7 +1,5 @@
 import random
 
-# il faut créer une grille neutre de A et quand on entre une coordonnée ça révèle la case
-
 
 def generate_grid(rows, columns):
     grid = []
@@ -17,7 +15,7 @@ def generate_grid(rows, columns):
 def get_random_char(grid_char):
     """
     take an array and gives a random character
-    :param grid_char: the array giving the possibible charachters
+    :param grid_char: the array giving the possible characters
     :return: a character
     """
     random_char = random.choice(grid_char)
@@ -36,31 +34,31 @@ def create_bomb_coordinates(grid_rows, grid_columns):
     return bomb_x_y
 
 
-def grid_generator(R, C, K):
+def grid_generator(rows, columns, bombs):
     """
-    geenarte a grid to play bomb squad
+    generate a grid to play bomb squad
 
-    :param R: number of lines
-    :param C: number of columns
-    :param K: number of bombs
+    :param rows: number of lines
+    :param columns: number of columns
+    :param bombs: number of bombs
     :return: a grid
     """
     grid = []
     bombs_coordinates = []
     # manufacturing some bombs...
-    for b in range(K):
-        bombs_coordinates.append(create_bomb_coordinates(R, C))
+    for b in range(bombs):
+        bombs_coordinates.append(create_bomb_coordinates(rows, columns))
     print(f"bombs coordinate : {bombs_coordinates}")
 
     # creating the grid
-    for c in range(C):
+    for c in range(columns):
         line = []
         safe_box = "0"
         bomb_box = "X"
         # line by line
-        for r in range(R):
+        for r in range(rows):
             instant_coordinate = [r, c]
-            if not instant_coordinate in bombs_coordinates:
+            if instant_coordinate not in bombs_coordinates:
                 line.append(safe_box)
             else:
                 line.append(bomb_box)
@@ -79,6 +77,5 @@ def game_play(nb_of_rows, nb_of_columns, nb_of_bombs):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-     game_play(5, 5, 3)
-
-
+    game_play(5, 5, 3)
+    # grid_generator(3,5,3)
