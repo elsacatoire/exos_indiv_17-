@@ -9,6 +9,7 @@ def generate_grid(rows, columns):
         line = []
         for r in range(rows):
             line.append("#")
+        print(line)
         grid.append(line)
     return grid
 
@@ -23,13 +24,13 @@ def get_random_char(grid_char):
     return random_char
 
 
-def create_bomb_cordonates(grid_rows, grid_columns):
+def create_bomb_coordinates(grid_rows, grid_columns):
     """
     :param grid_rows:
     :param grid_columns:
     :return:
     """
-    x_position = random.randrange(0,grid_columns)
+    x_position = random.randrange(0, grid_columns)
     y_position = random.randrange(0, grid_rows)
     bomb_x_y = [x_position, y_position]
     return bomb_x_y
@@ -48,7 +49,7 @@ def grid_generator(R, C, K):
     bombs_coordinates = []
     # manufacturing some bombs...
     for b in range(K):
-        bombs_coordinates.append(create_bomb_cordonates(R, C))
+        bombs_coordinates.append(create_bomb_coordinates(R, C))
     print(f"bombs coordinate : {bombs_coordinates}")
 
     # creating the grid
@@ -69,11 +70,15 @@ def grid_generator(R, C, K):
 
 
 def game_play(nb_of_rows, nb_of_columns, nb_of_bombs):
-
+    # setting the board game
+    generate_grid(nb_of_rows, nb_of_columns)
+    # generate the bombs, tik...tak...
+    for b in range(nb_of_bombs):
+        print(create_bomb_coordinates(nb_of_rows, nb_of_columns))
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    grid_generator(5, 5, 5)
-    print(generate_grid(4, 7))
+     game_play(5, 5, 3)
+
 
