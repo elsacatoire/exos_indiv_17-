@@ -1,5 +1,3 @@
-import random
-import itertools
 
 
 def hello(name):
