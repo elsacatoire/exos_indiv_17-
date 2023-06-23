@@ -1,5 +1,5 @@
 import unittest
-from main import cut_text, reconstruction_sentence, replace_some_words
+from main import cut_text, reconstruction_sentence, replace_some_words, compress_words
 
 
 class PhraseUtilsTests(unittest.TestCase):
@@ -35,6 +35,14 @@ class PhraseUtilsTests(unittest.TestCase):
         dictionary = {'texte': '1', 'lorem': '2', 'qui': '3', 'donc': '4', 'est': '5', 'que': '6', 'pour': '7', 'ceci': '8', 'faux-texte': '9', 'dans': '10', 'plus': '11', 'avec': '12'}
         result = replace_some_words(words_to_swap, dictionary)
         expected = ['mais', '8', '5', 'un', 'long', '9']
+        self.assertEqual(result, expected)
+
+
+    def test_compress_words(self):
+        # Test case 1
+        words_to_compress = ['mais', 'ceci', 'est', 'un', 'long', 'faux-texte']
+        result = compress_words(words_to_compress)
+        expected = 'mais 8 5 un long 9'
         self.assertEqual(result, expected)
 
 
