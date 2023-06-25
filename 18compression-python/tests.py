@@ -1,8 +1,9 @@
 import unittest
-from main import cut_text, reconstruction_sentence, replace_some_words, compress_words
+from compression import cut_text, reconstruction_sentence, replace_some_words, compress_words
+from decompression import text_reconstruction
 
 
-class PhraseUtilsTests(unittest.TestCase):
+class CompressionToolTest(unittest.TestCase):
     def test_cut_text(self):
         # Test case 1
         sentence_to_cut = "Hello, how are you ?"
@@ -44,6 +45,14 @@ class PhraseUtilsTests(unittest.TestCase):
         words_to_compress = 'mais ceci est un long faux-texte'
         result = compress_words(words_to_compress)
         expected = 'mais 8 5 un long 9'
+        self.assertEqual(result, expected)
+
+
+class DecompressionToolTest(unittest.TestCase):
+    def test_text_reconstruction(self):
+        part_to_decode = 'mais 8 5 un long 9'
+        result = text_reconstruction(part_to_decode)
+        expected = 'mais ceci est un long faux-texte'
         self.assertEqual(result, expected)
 
 
